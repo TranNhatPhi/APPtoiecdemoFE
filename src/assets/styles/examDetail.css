@@ -230,7 +230,30 @@
 /* ================================
 📱 Responsive Mobile Styles (≤768px)
 ================================ */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: #fff;
+        z-index: 1500;
+        transition: left 0.3s ease-in-out;
+        padding: 20px;
+        overflow-y: auto;
+        box-shadow: 2px 0px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .sidebar.closed {
+        left: -100%;
+    }
+
     .exam-page {
         flex-direction: column;
         padding: 10px;
@@ -242,15 +265,7 @@
         padding: 15px;
     }
 
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        border-right: none;
-        border-top: 1px solid #ccc;
-        padding: 10px;
-        margin-top: 20px;
-    }
+
 
     .question-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -312,6 +327,32 @@
     .timer {
         font-size: 16px;
         padding: 8px;
+    }
+
+    .hamburger-toggle {
+        position: fixed;
+        top: 2px;
+        left: 2px;
+        /* 💡 Cách sidebar 250px một chút */
+        width: 44px;
+        height: 44px;
+        background-color: #007bff;
+        color: white;
+        font-size: 22px;
+        border: none;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 2001;
+        /* 💥 Vượt cả .sidebar (z-index: 1500) */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+    }
+
+    .hamburger-toggle:hover {
+        background-color: #0056b3;
     }
 }
 

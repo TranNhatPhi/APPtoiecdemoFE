@@ -30,6 +30,8 @@ const ExamDetail: React.FC = () => {
     const autoSubmittedRef = useRef(false); // ✅ Đảm bảo chỉ chạy 1 lần
     const [showFixedTimer, setShowFixedTimer] = useState(false);
     const timerRef = useRef<HTMLDivElement | null>(null);
+    const [showSidebarMobile, setShowSidebarMobile] = useState(false);
+
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -210,7 +212,7 @@ const ExamDetail: React.FC = () => {
                 <div className="audio-player">
                     <strong>Nghe đoạn hội thoại:</strong>
                     <audio controls>
-                        <source src={`https://ap-ptoiecdemo-fe-git-master-trannhatphis-projects.vercel.app/listen/${examDetail.audio}`} type="audio/mpeg" />
+                        <source src={`http://localhost:3000/listen/${examDetail.audio}`} type="audio/mpeg" />
                         Trình duyệt của bạn không hỗ trợ phát audio.
                     </audio>
                 </div>
@@ -236,7 +238,7 @@ const ExamDetail: React.FC = () => {
                                     {q.image_filename && (
                                         <div className="question-image">
                                             <img
-                                                src={`https://ap-ptoiecdemo-fe-git-master-trannhatphis-projects.vercel.app/listen/part1/${q.image_filename}`}
+                                                src={`http://localhost:3000/listen/part1/${q.image_filename}`}
                                                 alt={`Question ${questionIndex + 1}`}
                                             />
                                         </div>
@@ -260,8 +262,18 @@ const ExamDetail: React.FC = () => {
                     </div>
                 ))}
             </div>
+            {/* ✅ Nút mở sidebar trên mobile */}
+            {window.innerWidth <= 1000 && (
+                <button
+                    className="open-sidebar-btn"
+                    onClick={() => setShowSidebarMobile(true)}
+                >
+                    📋 Danh sách câu hỏi
+                </button>
+            )}
 
-            <aside className="sidebar animate__animated animate__slideInLeft">
+            <aside className={`sidebar animate__animated animate__slideInLeft ${showSidebarMobile ? "open" : "closed"}`}>
+
                 <h3>Danh sách câu hỏi</h3>
                 <div className="answer-summary">
                     Đã chọn: {selectedCount}/{totalQuestions} câu
@@ -289,6 +301,7 @@ const ExamDetail: React.FC = () => {
                     </div>
                 ))}
             </aside>
+
             <div style={{ textAlign: "left" }}>
                 <button className="submit-button" onClick={() => handleSubmitExam(false)} disabled={isSubmitting || timeLeft === 0}>
                     {isSubmitting ? "Đang nộp..." : "📝 Nộp bài"}
@@ -298,6 +311,14 @@ const ExamDetail: React.FC = () => {
             <div className="timer-fixed animate__animated animate__pulse animate__infinite">
                 ⏳ <strong>Thời gian còn lại:</strong> {formatTime(timeLeft)}
             </div>
+            {window.innerWidth <= 1000 && (
+                <button
+                    className="hamburger-toggle"
+                    onClick={() => setShowSidebarMobile(prev => !prev)}
+                >
+                    ☰
+                </button>
+            )}
         </div>
 
     );
