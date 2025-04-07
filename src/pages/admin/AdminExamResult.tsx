@@ -198,7 +198,22 @@ const AdminExamResult: React.FC<{ disableCustomTheme?: boolean }> = (props) => {
                             <Button className="btn-glow" variant="outlined" color="secondary" size="small" onClick={scrollToBottom}>🔽 Đến cuối trang</Button>
 
                             <Typography variant="h5" mb={2}>📊 Danh sách kết quả bài thi</Typography>
-
+                            <FormControl size="small" sx={{ minWidth: 150 }}>
+                                <InputLabel id="export-select-label" sx={{ mt: -1, fontWeight: 800 }}>Định dạng</InputLabel>
+                                <Select
+                                    labelId="export-select-label"
+                                    value={exportType}
+                                    label="Định dạng"
+                                    onChange={(e) => setExportType(e.target.value)}
+                                >
+                                    <MenuItem value="excel">Excel (.xlsx)</MenuItem>
+                                    <MenuItem value="csv">CSV</MenuItem>
+                                    <MenuItem value="pdf">PDF</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <Button className="btn-glow" variant="outlined" startIcon={<FileDownload />} onClick={handleExportAll}>
+                                📁 Xuất tất cả
+                            </Button>
                             <Stack direction="row" spacing={2}>
                                 {selectedIds.length > 0 && (
                                     <Button className="btn-glow"
@@ -209,22 +224,7 @@ const AdminExamResult: React.FC<{ disableCustomTheme?: boolean }> = (props) => {
                                         🗑 Xóa {selectedIds.length} kết quả đã chọn
                                     </Button>
                                 )}
-                                <FormControl size="small" sx={{ minWidth: 150 }}>
-                                    <InputLabel id="export-select-label" sx={{ mt: -1, fontWeight: 800 }}>Định dạng</InputLabel>
-                                    <Select
-                                        labelId="export-select-label"
-                                        value={exportType}
-                                        label="Định dạng"
-                                        onChange={(e) => setExportType(e.target.value)}
-                                    >
-                                        <MenuItem value="excel">Excel (.xlsx)</MenuItem>
-                                        <MenuItem value="csv">CSV</MenuItem>
-                                        <MenuItem value="pdf">PDF</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <Button className="btn-glow" variant="outlined" startIcon={<FileDownload />} onClick={handleExportAll}>
-                                    📁 Xuất tất cả
-                                </Button>
+
                             </Stack>
                             {/* <Stack direction="row" spacing={2} mb={2} justifyContent="flex-end">
 

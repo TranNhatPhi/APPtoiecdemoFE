@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import socket from "../../socket"; // ✅ Dùng socket chung
 import { fetchAllUsers } from "../../services/userService";
 import {
     Table,
@@ -22,18 +22,6 @@ import SideMenu from '../dashboard/components/SideMenu';
 import AppTheme from '../../shared-theme/AppTheme';
 import { alpha } from '@mui/material/styles';
 import "animate.css";
-import { toast } from "react-toastify";
-
-const socket = io("https://app-toiec-be-v4.onrender.com"); // 🔌 Socket kết nối BE
-
-// 🔁 Khi socket kết nối lại, gửi userId nếu có trong localStorage
-// socket.on("connect", () => {
-//     const userId = localStorage.getItem("user_id");
-//     if (userId) {
-//         socket.emit("user-online", Number(userId));
-
-//     }
-// });
 
 const AdminUserTable: React.FC<{ disableCustomTheme?: boolean }> = (props) => {
     const [users, setUsers] = useState<any[]>([]);
@@ -54,19 +42,20 @@ const AdminUserTable: React.FC<{ disableCustomTheme?: boolean }> = (props) => {
     useEffect(() => {
         loadUsers();
 
-        // Lắng nghe socket khi có update trạng thái online
-        socket.on("update-online-users", (onlineIds: number[]) => {
-
+        // ✅ Cập nhật online status realtime
+        const handleUpdateOnline = (onlineIds: number[]) => {
             setUsers(prev =>
                 prev.map(user => ({
                     ...user,
-                    online: onlineIds.includes(user.id)
+                    online: onlineIds.includes(user.id),
                 }))
             );
-        });
+        };
+
+        socket.on("update-online-users", handleUpdateOnline);
 
         return () => {
-            socket.off("update-online-users");
+            socket.off("update-online-users", handleUpdateOnline); // ✅ cleanup đúng cách
         };
     }, []);
 
@@ -89,7 +78,10 @@ const AdminUserTable: React.FC<{ disableCustomTheme?: boolean }> = (props) => {
                 >
                     <Stack spacing={2} className="animate__animated animate__fadeIn">
                         <Header />
-                        <Paper sx={{ p: 3, borderRadius: 4, boxShadow: '0px 8px 24px rgba(0,0,0,0.15)' }} className="animate__animated animate__zoomIn">
+                        <Paper
+                            sx={{ p: 3, borderRadius: 4, boxShadow: '0px 8px 24px rgba(0,0,0,0.15)' }}
+                            className="animate__animated animate__zoomIn"
+                        >
                             <Typography variant="h5" mb={2}>📋 Danh sách người dùng</Typography>
 
                             {loading ? (

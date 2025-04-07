@@ -1,7 +1,6 @@
 // src/services/authService.ts
-
 import { api } from "./api";
-import io from "socket.io-client";
+import socket from "../socket"; // ✅ dùng socket chung
 import { toast } from "react-toastify";
 
 interface RegisterData {
@@ -19,29 +18,23 @@ interface LoginData {
     password: string;
 }
 
-// 🔌 Kết nối socket
-const socket = io("https://app-toiec-be-v4.onrender.com");
-
-// ✅ Khi socket kết nối lại (sau F5, refresh, mất mạng...), gửi lại userId nếu có
+// ✅ Lắng nghe reconnect: gửi lại userId khi socket reconnect (F5, rớt mạng...)
 socket.on("connect", () => {
     const storedUserId = localStorage.getItem("user_id");
     if (storedUserId) {
-        // Gửi lại userId cho server để thông báo online
         socket.emit("user-online", Number(storedUserId));
-        toast.info(`👤 Người dùng ID ${storedUserId} đã online`, {
-            position: "bottom-right",
-        });
-
+        console.log(`🔁 Reconnected - resent user-online for ID ${storedUserId}`);
     }
 });
 
-// ✅ Lắng nghe sự kiện online nhưng KHÔNG hiện toast khi chỉ F5 (chỉ hiện khi thực sự login)
+// ✅ Hiển thị toast khi vừa login (không hiện khi chỉ F5)
 let hasJustLoggedIn = false;
 
 socket.on("update-online-users", (onlineUserIds: number[]) => {
     if (hasJustLoggedIn) {
         const lastOnlineId = onlineUserIds[onlineUserIds.length - 1];
-        if (lastOnlineId) {
+        const currentUserId = Number(localStorage.getItem("user_id"));
+        if (lastOnlineId && lastOnlineId !== currentUserId) {
             toast.info(`👤 Người dùng ID ${lastOnlineId} vừa online`, {
                 position: "bottom-right",
             });
@@ -68,23 +61,23 @@ export const loginUser = async (loginData: LoginData) => {
         const response = await api.post("/auth/login", loginData);
         const { token } = response.data;
 
-        // 👉 Lưu token vào localStorage
         localStorage.setItem("token", token);
 
-        // ✅ Decode token để lấy userId và thông báo online
+        // ✅ Giải mã token để lấy userId
         const decoded: any = JSON.parse(atob(token.split(".")[1]));
-        const userId = decoded.userId;
-        toast.info(`👤 Người dùng ID ${userId} vừa online`, {
-            position: "bottom-right",
-        });
-        socket.emit("user-online", userId); // Gửi sự kiện người dùng online
+        const userId = decoded?.userId;
 
-        // ✅ Lưu thêm userId để gửi lại khi F5
-        localStorage.setItem("user_id", userId.toString());
-        hasJustLoggedIn = true; // 👉 Chỉ cho phép hiển thị toast khi vừa login
+        if (userId) {
+            toast.info(`👤 Người dùng ID ${userId} vừa online`, {
+                position: "bottom-right",
+            });
 
-        // Thông báo cho tất cả các client rằng có người đăng nhập
-        socket.emit("new-user-login", userId);
+            socket.emit("user-online", userId);
+            socket.emit("new-user-login", userId);
+
+            localStorage.setItem("user_id", userId.toString());
+            hasJustLoggedIn = true;
+        }
 
         return response.data;
     } catch (error: any) {
@@ -95,15 +88,21 @@ export const loginUser = async (loginData: LoginData) => {
 
 // ✅ Logout + Gửi trạng thái offline
 export const logoutUser = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-        const decoded: any = JSON.parse(atob(token.split(".")[1]));
-        const userId = decoded.userId;
-        // Thông báo cho tất cả các client rằng có người đăng xuất
-        socket.emit("user-offline", userId); // Gửi sự kiện người dùng offline
-        toast.info(`👤 Người dùng ID ${userId} vừa offline`, {
-            position: "bottom-right",
-        });
+    try {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const decoded: any = JSON.parse(atob(token.split(".")[1]));
+            const userId = decoded?.userId;
+
+            if (userId) {
+                socket.emit("user-offline", userId);
+                toast.info(`👤 Người dùng ID ${userId} vừa offline`, {
+                    position: "bottom-right",
+                });
+            }
+        }
+    } catch (error) {
+        console.warn("❗Lỗi giải mã token khi logout:", error);
     }
 
     localStorage.removeItem("token");
@@ -111,3 +110,11 @@ export const logoutUser = () => {
     toast.info("👋 Bạn đã đăng xuất!", { position: "bottom-right" });
     window.location.href = "/";
 };
+
+// ✅ (Tuỳ chọn) Gửi user-offline khi đóng tab
+window.addEventListener("beforeunload", () => {
+    const userId = localStorage.getItem("user_id");
+    if (userId) {
+        socket.emit("user-offline", Number(userId));
+    }
+});

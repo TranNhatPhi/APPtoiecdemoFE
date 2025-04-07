@@ -11,7 +11,7 @@ interface AuthModalProps {
     closeModal: () => void;
     setIsLoggedIn: (isLoggedIn: boolean) => void;
 }
-    
+
 const AuthModal: React.FC<AuthModalProps> = ({ closeModal, setIsLoggedIn }) => {
     const [isRegisterTab, setIsRegisterTab] = useState(false);
     const [formData, setFormData] = useState({
