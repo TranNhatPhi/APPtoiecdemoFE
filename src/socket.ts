@@ -1,6 +1,6 @@
 // src/socket.ts
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000"); // ⚠️ chỉnh IP nếu khác
+const socket = io("https://app-toiec-be-v4.onrender.com"); // ⚠️ chỉnh IP nếu khác
 
 export default socket;

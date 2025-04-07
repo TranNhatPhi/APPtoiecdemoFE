@@ -17,7 +17,7 @@ const useExamDetail = (examId: number, expired: boolean) => {
 
             try {
                 setLoading(true);
-                const url = `http://localhost:5000/api/exams/${examId}/questions${expired ? "?expired=true" : ""}`;
+                const url = `https://app-toiec-be-v4.onrender.com/api/exams/${examId}/questions${expired ? "?expired=true" : ""}`;
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {

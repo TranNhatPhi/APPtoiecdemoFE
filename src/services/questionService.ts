@@ -10,14 +10,14 @@ const getAccessToken = (): string | null => {
 };
 
 export const getTotalquestion = async () => {
-    const res = await fetch("http://localhost:5000/api/questions/countallquestion");
+    const res = await fetch("https://app-toiec-be-v4.onrender.com/api/questions/countallquestion");
     const json = await res.json();
     return json.data; // Trả về mảng [{date, count}]
 };
 
 export const fetchAllQuestions = async () => {
     try {
-        const res = await fetch("http://localhost:5000/api/questions");
+        const res = await fetch("https://app-toiec-be-v4.onrender.com/api/questions");
         if (!res.ok) {
             throw new Error("Lỗi khi gọi API lấy câu hỏi");
         }
@@ -30,7 +30,7 @@ export const fetchAllQuestions = async () => {
     }
 };
 export const fetchQuestionsWithPagination = async (page = 1, limit = 10) => {
-    const res = await fetch(`http://localhost:5000/api/questions/paginate?page=${page}&limit=${limit}`);
+    const res = await fetch(`https://app-toiec-be-v4.onrender.com/api/questions/paginate?page=${page}&limit=${limit}`);
     const json = await res.json();
 
     return {
@@ -43,7 +43,7 @@ export const createQuestion = async (questionData: any) => {
     const token = getAccessToken();
     if (!token) throw new Error("Không có accessToken!");
 
-    const res = await fetch("http://localhost:5000/api/questions", {
+    const res = await fetch("https://app-toiec-be-v4.onrender.com/api/questions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const importQuestionsFromCSV = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const res = await fetch("http://localhost:5000/api/questions/import-csv", {
+    const res = await fetch("https://app-toiec-be-v4.onrender.com/api/questions/import-csv", {
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`, // KHÔNG set Content-Type ở đây!
@@ -91,7 +91,7 @@ export const deleteQuestion = async (id: number) => {
     const token = getAccessToken();
     if (!token) throw new Error("Bạn chưa đăng nhập!");
 
-    const response = await fetch(`http://localhost:5000/api/questions/${id}`, {
+    const response = await fetch(`https://app-toiec-be-v4.onrender.com/api/questions/${id}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${token}`,
@@ -110,7 +110,7 @@ export const updateQuestion = async (id: number, data: any) => {
     const token = getAccessToken();
     if (!token) throw new Error("Bạn chưa đăng nhập!");
 
-    const response = await fetch(`http://localhost:5000/api/questions/${id}`, {
+    const response = await fetch(`https://app-toiec-be-v4.onrender.com/api/questions/${id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Bearer ${token}`,

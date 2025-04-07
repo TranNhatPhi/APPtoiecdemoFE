@@ -2,7 +2,7 @@ import axios from "axios";
 
 // ✅ Tạo instance Axios
 const api = axios.create({
-    baseURL: "http://localhost:5000/api", // 🔹 Thay bằng URL API của bạn
+    baseURL: "https://app-toiec-be-v4.onrender.com/api", // 🔹 Thay bằng URL API của bạn
 });
 
 // ✅ Thêm Interceptor để gắn token vào mỗi request

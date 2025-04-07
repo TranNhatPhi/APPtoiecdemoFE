@@ -20,7 +20,7 @@ interface LoginData {
 }
 
 // 🔌 Kết nối socket
-const socket = io("http://localhost:5000");
+const socket = io("https://app-toiec-be-v4.onrender.com");
 
 // ✅ Khi socket kết nối lại (sau F5, refresh, mất mạng...), gửi lại userId nếu có
 socket.on("connect", () => {

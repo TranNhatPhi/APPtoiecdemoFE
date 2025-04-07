@@ -1,6 +1,6 @@
 import { Exam } from "../models/exam";
 
-const API_URL = "http://localhost:5000/api/exams";
+const API_URL = "https://app-toiec-be-v4.onrender.com/api/exams";
 export const fetchExams = async (): Promise<Exam[]> => {
     try {
         console.log("Fetching exams from API...");

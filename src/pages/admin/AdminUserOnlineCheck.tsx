@@ -24,7 +24,7 @@ import { alpha } from '@mui/material/styles';
 import "animate.css";
 import { toast } from "react-toastify";
 
-const socket = io("http://localhost:5000"); // 🔌 Socket kết nối BE
+const socket = io("https://app-toiec-be-v4.onrender.com"); // 🔌 Socket kết nối BE
 
 // 🔁 Khi socket kết nối lại, gửi userId nếu có trong localStorage
 // socket.on("connect", () => {

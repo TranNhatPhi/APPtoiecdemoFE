@@ -1,6 +1,6 @@
 import { ExamResult } from "../models/examResult";
 import axios from "axios";
-const API_URL = "http://localhost:5000/api/exam-results"; // 🔹 Endpoint chính
+const API_URL = "https://app-toiec-be-v4.onrender.com/api/exam-results"; // 🔹 Endpoint chính
 
 /**
  * 📝 Gửi bài thi lên Server

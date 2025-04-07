@@ -1,5 +1,5 @@
 // src/services/userService.ts
-const API_BASE_URL = "http://localhost:5000/api/users";
+const API_BASE_URL = "https://app-toiec-be-v4.onrender.com/api/users";
 
 // ✅ Lấy toàn bộ người dùng
 export const fetchAllUsers = async () => {
