@@ -4,6 +4,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     plugins: [react()],
     server: {
-        port: 3000, // ← Đổi sang cổng nào tuỳ ý (ví dụ: 3000 hoặc 8080)
+        port: 3000,
     },
+    build: {
+        outDir: 'dist',
+    },
+    base: '/', // đảm bảo chạy đúng trên Vercel
 });
