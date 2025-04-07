@@ -1,13 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
     build: {
         outDir: 'dist',
     },
-    server: {
-        port: 5173, // mặc định Vite dùng port này
-    },
+    base: '/', // ← thêm dòng này, đảm bảo đường dẫn gốc luôn đúng khi deploy
 });
