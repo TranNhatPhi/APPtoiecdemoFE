@@ -249,3 +249,44 @@
         margin: 10px 0;
     }
 }
+
+/* 📱 Nút toggle menu cho mobile */
+.menu-toggle {
+    display: none;
+    background: none;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+/* Khi menu mở ra */
+.nav-links.open {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Responsive menu */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 10px;
+        top: 15px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.05);
+        margin-top: 10px;
+        padding: 10px 0;
+    }
+
+    .auth-section {
+        margin-top: 10px;
+    }
+}

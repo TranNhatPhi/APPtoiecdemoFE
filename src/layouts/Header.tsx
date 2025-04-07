@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AuthModal from "../components/AuthModal";
-import { toast } from "react-toastify"; // ✅ Đúng!
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const Header: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [showModal, setShowModal] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false); // 👉 Toggle menu
 
-    // Kiểm tra token trong localStorage để xác định trạng thái đăng nhập thực sự
     useEffect(() => {
         const token = localStorage.getItem("token");
-        setIsLoggedIn(!!token); // Có token thì true
+        setIsLoggedIn(!!token);
     }, []);
 
-    // Xử lý logout
     const handleLogout = () => {
         Swal.fire({
             title: "Bạn có chắc chắn muốn đăng xuất?",
@@ -32,21 +31,25 @@ const Header: React.FC = () => {
         });
     };
 
-
-
     return (
         <header className="header">
             <div className="logo">TOEiC APP</div>
 
-            <nav>
-                <ul className="nav-links">
-                    <li><a href="#">My Courses</a></li>
-                    <li><a href="#">Study Program</a></li>
-                    <li><a href="#">Online Tests</a></li>
-                    <li><a href="#">Flashcards</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Activate Account</a></li>
-                </ul>
+            {/* Hamburger icon cho mobile */}
+            <button
+                className="menu-toggle"
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
+                ☰
+            </button>
+
+            <nav className={menuOpen ? "nav-links open" : "nav-links"}>
+                <li><a href="#">My Courses</a></li>
+                <li><a href="#">Study Program</a></li>
+                <li><a href="#">Online Tests</a></li>
+                <li><a href="#">Flashcards</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Activate Account</a></li>
             </nav>
 
             <div className="auth-section">
@@ -57,11 +60,11 @@ const Header: React.FC = () => {
                 )}
             </div>
 
-            {/* Modal đăng nhập */}
+            {/* Modal */}
             {showModal && (
                 <AuthModal
                     closeModal={() => setShowModal(false)}
-                    setIsLoggedIn={setIsLoggedIn} // để AuthModal gọi sau khi login thành công
+                    setIsLoggedIn={setIsLoggedIn}
                 />
             )}
         </header>

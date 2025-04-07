@@ -227,46 +227,100 @@
     border: 2px solid #218838;
 }
 
-/* ==============================
-   📌 Responsive - Hiển thị 3 cột trên màn hình nhỏ
-   ============================== */
+/* ================================
+📱 Responsive Mobile Styles (≤768px)
+================================ */
 @media screen and (max-width: 768px) {
+    .exam-page {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .exam-container {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+
     .sidebar {
         width: 100%;
         height: auto;
         position: relative;
         border-right: none;
-        border-bottom: 2px solid #ddd;
+        border-top: 1px solid #ccc;
         padding: 10px;
+        margin-top: 20px;
     }
 
     .question-grid {
         grid-template-columns: repeat(3, 1fr);
-        /* Chỉ 3 nút trên mỗi hàng */
     }
 
-    .exam-container {
-        margin-left: 0;
-        padding: 15px;
+    .question-button {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+        margin: 3px;
     }
 
-    .timer {
+    .submit-button {
+        width: 100%;
         font-size: 16px;
-        padding: 8px;
+        padding: 12px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .timer-fixed {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        color: #000;
+        padding: 10px;
+        text-align: center;
+        border-top: 1px solid #ccc;
+        font-weight: bold;
+        z-index: 1000;
+    }
+
+    .audio-player {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .question img {
+        width: 100%;
+        height: auto;
+    }
+
+    .question p,
+    .radio-container span {
+        font-size: 15px;
+    }
+
+    .question ul li {
+        padding: 6px 0;
     }
 
     .exam-part h3 {
         font-size: 18px;
     }
 
-    .question p {
-        font-size: 14px;
-    }
-
-    .question li {
+    .timer {
+        font-size: 16px;
         padding: 8px;
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .timer-fixed {
+        display: none !important;
+    }
+}
+
 
 .answer-summary {
     margin: 16px 0;
@@ -303,9 +357,10 @@
 
 .timer-fixed {
     position: fixed;
-    top: 20px;
+    top: 3%;
     /* nằm trên nút submit */
-    right: 50px;
+    left: 80%;
+
     background-color: #fff3cd;
     color: #d32f2f;
     padding: 12px 24px;
@@ -314,8 +369,8 @@
     border: 2px solid #ffa726;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
     animation: glow 1.5s infinite alternate;
+
 }
 
 
