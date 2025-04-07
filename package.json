@@ -1,0 +1,88 @@
+{
+  "name": "fe_reactts_toiec",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fontsource/roboto": "^5.2.5",
+    "@mui/icons-material": "^7.0.1",
+    "@mui/material": "^7.0.1",
+    "@mui/x-charts": "^7.28.0",
+    "@mui/x-data-grid": "^7.28.2",
+    "@mui/x-data-grid-pro": "^7.28.2",
+    "@mui/x-date-pickers": "^7.28.2",
+    "@mui/x-date-pickers-pro": "^7.28.2",
+    "@mui/x-tree-view": "^7.28.1",
+    "@react-spring/web": "^9.7.5",
+    "@react-three/drei": "^9.88.7",
+    "@react-three/fiber": "^8.13.5",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@tsparticles/all": "^3.8.1",
+    "@tsparticles/engine": "^3.8.1",
+    "@tsparticles/react": "^3.0.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.126",
+    "animate.css": "^4.1.1",
+    "axios": "^1.7.9",
+    "bcryptjs": "^3.0.1",
+    "bootstrap": "^5.3.5",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
+    "jwt-decode": "^4.0.0",
+    "mysql2": "^3.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.3.8",
+    "react-icons": "^4.10.1",
+    "react-router-dom": "^7.1.5",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^11.0.5",
+    "react-tsparticles": "^2.12.2",
+    "socket.io-client": "^4.8.1",
+    "sweetalert2": "^11.17.2",
+    "three": "^0.175.0",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.4",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.2.5"
+  }
+}

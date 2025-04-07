@@ -1,0 +1,53 @@
+/* exams.css - Styling cho CourseCard */
+.course-card {
+    background: white;
+    border: 1px solid #ddd;
+    /* Viền xung quanh */
+    border-radius: 8px;
+    /* Bo góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Đổ bóng */
+    padding: 16px;
+    margin: 16px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+    max-width: 400px;
+    /* Giới hạn độ rộng */
+}
+
+.course-card:hover {
+    transform: scale(1.03);
+    /* Phóng to nhẹ khi hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* Tăng độ đổ bóng khi hover */
+}
+
+.course-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.course-card p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.course-card .tags {
+    margin-top: 8px;
+}
+
+.course-card button {
+    width: 100%;
+    padding: 10px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.course-card button:hover {
+    background-color: #4a00c4;
+}

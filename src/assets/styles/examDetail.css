@@ -1,0 +1,341 @@
+/* ==============================
+   📌 CSS cho trang ExamDetail.tsx
+   ============================== */
+
+/* 🟢 Tổng thể trang bài thi */
+.exam-page {
+    display: flex;
+}
+
+/* ==============================
+   📌 Sidebar danh sách câu hỏi
+   ============================== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #f8f9fa;
+    padding: 20px;
+    border-right: 2px solid #ddd;
+    overflow-y: auto;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 🟢 Tiêu đề danh sách câu hỏi */
+.sidebar h3 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* 🟢 Nhóm câu hỏi theo từng phần */
+.question-group {
+    margin-bottom: 20px;
+}
+
+.question-group h4 {
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* 🟢 Lưới câu hỏi (4 cột trên hàng ngang) */
+.question-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    justify-content: center;
+}
+
+/* 🟢 Nút câu hỏi */
+.question-button {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.question-button:hover {
+    background: #007bff;
+    color: white;
+}
+
+.question-button.active {
+    background: #0056b3;
+    color: white;
+}
+
+/* ==============================
+   📌 Nội dung bài thi
+   ============================== */
+.exam-container {
+    flex-grow: 1;
+    margin-left: 270px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+/* 🟢 Tiêu đề bài thi */
+.exam-container h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 🟢 Phần nghe Audio */
+.audio-player {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.audio-player strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.audio-player audio {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* 🟢 Bộ đếm thời gian */
+.timer {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #d9534f;
+    background: #fff3cd;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #d9534f;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ==============================
+   📌 Danh sách các phần thi
+   ============================== */
+.exam-part {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* 🟢 Tiêu đề từng phần */
+.exam-part h3 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* ==============================
+   📌 Câu hỏi và lựa chọn đáp án
+   ============================== */
+.question {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    margin-bottom: 15px;
+}
+
+.question:hover {
+    transform: translateY(-2px);
+}
+
+.question:last-child {
+    border-bottom: none;
+}
+
+.question p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* ==============================
+   📌 Làm cho toàn bộ khung đáp án có thể bấm
+   ============================== */
+.radio-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    border: 2px solid transparent;
+}
+
+/* Tạo khoảng cách giữa radio và nội dung */
+.radio-container input {
+    margin-right: 10px;
+}
+
+/* Khi bấm vào khung, đổi màu nhẹ */
+.radio-container:hover {
+    background: #e9ecef;
+    transform: scale(1.03);
+}
+
+/* Khi radio được chọn, đổi màu border */
+.radio-container input:checked+span {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.radio-container input:checked {
+    border-color: #007bff;
+}
+
+.question ul {
+    list-style: none;
+    /* Loại bỏ dấu chấm */
+    padding: 0;
+    margin: 0;
+}
+
+/* 🟢 Câu hỏi đã trả lời (nút trong sidebar) */
+.question-button.answered {
+    background: #28a745;
+    color: white;
+    border: 2px solid #218838;
+}
+
+/* ==============================
+   📌 Responsive - Hiển thị 3 cột trên màn hình nhỏ
+   ============================== */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 2px solid #ddd;
+        padding: 10px;
+    }
+
+    .question-grid {
+        grid-template-columns: repeat(3, 1fr);
+        /* Chỉ 3 nút trên mỗi hàng */
+    }
+
+    .exam-container {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .timer {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .exam-part h3 {
+        font-size: 18px;
+    }
+
+    .question p {
+        font-size: 14px;
+    }
+
+    .question li {
+        padding: 8px;
+    }
+}
+
+.answer-summary {
+    margin: 16px 0;
+    padding: 12px;
+    background-color: #f0f8ff;
+    border: 2px solid #007bff33;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.submit-button {
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    /* ✅ Đưa nút về góc phải */
+    background-color: #28a745;
+    /* ✅ Màu xanh đẹp */
+    color: white;
+    font-size: 18px;
+    /* ✅ Tăng kích thước */
+    font-weight: bold;
+    padding: 15px 30px;
+    /* ✅ Tăng padding */
+    border: none;
+    border-radius: 8px;
+    /* ✅ Bo góc mềm mại */
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.timer-fixed {
+    position: fixed;
+    top: 20px;
+    /* nằm trên nút submit */
+    right: 50px;
+    background-color: #fff3cd;
+    color: #d32f2f;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid #ffa726;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    animation: glow 1.5s infinite alternate;
+}
+
+
+/* 🌟 Hiệu ứng glow nhẹ */
+@keyframes glow {
+    from {
+        box-shadow: 0 0 8px #ffa726, 0 0 16px #ff9800;
+    }
+
+    to {
+        box-shadow: 0 0 12px #ffb74d, 0 0 20px #ffcc80;
+    }
+}
+
+.submit-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.submit-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}

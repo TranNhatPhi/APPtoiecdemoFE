@@ -1,0 +1,133 @@
+/* Modal Background */
+.auth-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Auth Modal Container */
+.auth-modal-container {
+    background: #fff;
+    width: 420px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Header của Modal */
+.auth-modal-header {
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    color: white;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Nội dung modal */
+.auth-modal-content {
+    padding: 30px;
+}
+
+/* Input fields */
+.auth-modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.auth-modal-content input:focus {
+    border-color: #ff758c;
+    outline: none;
+}
+
+/* Error message */
+.auth-error-text {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+.auth-modal-content button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+}
+
+.auth-modal-content .btn-primary {
+    background: #ff758c;
+    color: white;
+}
+
+.auth-modal-content .btn-primary:hover {
+    background: #ff5b77;
+}
+
+.auth-modal-content .btn-secondary {
+    background: none;
+    color: #ff758c;
+    font-weight: bold;
+}
+
+.auth-modal-content .btn-secondary:hover {
+    text-decoration: underline;
+}
+
+/* Close Button */
+.auth-modal-close {
+    background: #ff5b77;
+    color: white;
+    margin-top: 10px;
+}
+
+.auth-modal-close:hover {
+    background: #e03b5c;
+}
+
+/* Switch giữa Đăng nhập và Đăng ký */
+.auth-switch-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.auth-switch-text span {
+    color: #ff758c;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.auth-switch-text span:hover {
+    text-decoration: underline;
+}
+
+/* Hiệu ứng mở modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
