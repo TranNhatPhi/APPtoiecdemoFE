@@ -212,7 +212,7 @@ const ExamDetail: React.FC = () => {
                 <div className="audio-player">
                     <strong>Nghe đoạn hội thoại:</strong>
                     <audio controls>
-                        <source src={`http://localhost:3000/listen/${examDetail.audio}`} type="audio/mpeg" />
+                        <source src={`https://ap-ptoiecdemo-fe.vercel.app/listen/${examDetail.audio}`} type="audio/mpeg" />
                         Trình duyệt của bạn không hỗ trợ phát audio.
                     </audio>
                 </div>
@@ -238,7 +238,7 @@ const ExamDetail: React.FC = () => {
                                     {q.image_filename && (
                                         <div className="question-image">
                                             <img
-                                                src={`http://localhost:3000/listen/part1/${q.image_filename}`}
+                                                src={`https://ap-ptoiecdemo-fe.vercel.app/listen/part1/${q.image_filename}`}
                                                 alt={`Question ${questionIndex + 1}`}
                                             />
                                         </div>
